@@ -140,11 +140,6 @@ This step covers how to prepare the dataset, define correct mappings, and index 
 - Read each pair of index instruction and document, and store them in a list of actions.
 - Use the `bulk()` helper from the Python Elasticsearch client to insert all documents in one go.
 - Verify that documents were successfully indexed.
-
-### 🔍 Step 5: Verify the Mapping (Optional)
-
-- Retrieve the index mapping using Elasticsearch’s client to confirm all fields were indexed with the correct data types.
-
 ---
 
 
@@ -252,68 +247,7 @@ Steps to add a drilldown:
 6. Save the visualization with the drilldown enabled.
 
 > 🔄 Example: Clicking on a bar in the `smoking_status` chart can take the user to a filtered dashboard view showing stroke cases within that smoking category.
-
-### 🧪 Step 3: Test Interactivity
-
-- Go to your dashboard and test:
-  - Clicking elements in charts to apply filters automatically.
-  - Applying multiple filters at once to see how all visualizations respond dynamically.
-
-This enables deeper analysis of high-risk subgroups and pattern discovery across the dataset.
-
 ---
-
-
----
-
-## ⏱️ Task 4: Real-Time Health Monitoring Integration (Optional)
-
-This step simulates real-time data streaming and enables live dashboards and alerts for proactive health monitoring.
-
-### 🌀 Step 1: Simulate Streaming Data using Logstash or Filebeat
-
-You can choose either **Logstash** or **Filebeat** to push updated or new records into Elasticsearch periodically.
-
-#### If using Logstash:
-- Create a `.conf` file with input (e.g., CSV/JSON), filter (optional), and Elasticsearch output.
-- Run Logstash with the configuration file using Command Prompt.
-
-#### If using Filebeat:
-- Install Filebeat from the Elastic website.
-- Configure the `filebeat.yml` file to:
-  - Monitor your NDJSON or CSV file.
-  - Output to your local Elasticsearch instance.
-- Run Filebeat to begin sending updates.
-
-> 🔁 Tip: Modify the dataset slightly over time or simulate sensor inputs to create new lines and observe updates in Kibana.
-
-### 📡 Step 2: Enable Auto-Refresh in Kibana
-
-- Open your Dashboard in Kibana.
-- Click on the **"Refresh" icon** next to the time range.
-- Set the **Auto-Refresh interval** to a low value like 5s or 10s.
-- This will keep updating the visualizations as new records arrive.
-
-### 🚨 Step 3: Configure Alerts for High-Risk Values
-
-Kibana lets you set up alerts based on specific conditions (e.g., high stroke risk).
-
-Steps to set alerts:
-1. Go to **"Stack Management" → "Rules and Connectors"**.
-2. Click **"Create Rule"**.
-3. Choose **Elasticsearch Query** or **Threshold** type.
-4. Configure rule conditions:
-   - Index: `stroke_data`
-   - Condition: e.g., `"stroke": true` and `"avg_glucose_level" > 200`
-5. Choose the alert action (e.g., log it, send email, or push to Slack).
-6. Save and enable the rule.
-
-> 🚨 Example: Get notified when any patient data indicates a stroke risk with very high glucose or BMI levels.
-
-This real-time setup mimics a live healthcare monitoring system, helping identify at-risk individuals immediately.
-
----
-
 
 ---
 
